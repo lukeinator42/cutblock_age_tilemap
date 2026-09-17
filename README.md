@@ -1,7 +1,10 @@
-# Cutblock-age XYZ tile layer for iHunter
+# Cutblock-age XYZ tile layer — WMU 356 / 354 / 353 (Cutbank / Deep Valley / Simonette)
 
-1,672 transparent PNG tiles (256x256, EPSG:3857, standard Google/XYZ numbering,
-zoom 9-15), colored by cutblock age:
+25,638 transparent PNG tiles (256x256, EPSG:3857, standard Google/XYZ numbering,
+zoom 9-15), covering the full boundaries of these three WMUs (~204 x 148 km),
+not just the original small camp AOI. 42.9 MB total.
+
+Same age/color scheme as before:
 
 | Age | Color |
 |---|---|
@@ -11,35 +14,22 @@ zoom 9-15), colored by cutblock age:
 | 26-35 yr | brown |
 | 36+ yr / unknown | dark brown |
 
-## 1. Host these files somewhere with a stable URL
+## Hosting + iHunter setup
 
-These are plain static files — any static host works. Easiest free options:
+Same as the camp-AOI version:
+1. Push this folder to a GitHub repo, enable **Pages** (Settings -> Pages ->
+   Deploy from a branch -> root).
+2. In iHunter's "Add a Base Map": Map Type = XYZ, Server URL =
+   `https://<your-username>.github.io/<repo-name>/{z}/{x}/{y}.png` (check
+   whether the numbered folders landed at the repo root or one level deeper,
+   same as before), Max Zoom = 15.
+3. **Test offline persistence before the trip** (WiFi on, pan/zoom the whole
+   area, then Airplane Mode) -- unverified whether iHunter caches custom XYZ
+   tiles for offline use.
 
-- **GitHub Pages**: create a repo, push this whole `cutblock_age_tiles` folder to it,
-  enable Pages in the repo settings. Your tile URL becomes
-  `https://<username>.github.io/<repo>/{z}/{x}/{y}.png`
-- **Cloudflare Pages** / **Netlify**: drag-and-drop deploy, similar result.
+## Data note
 
-I can't provision hosting myself (no cloud account access from here) — this part
-needs to be done from your own account.
-
-## 2. Add it in iHunter
-
-From the "Add a Base Map" screen:
-- **Map Type**: XYZ
-- **Server URL**: `https://<your-host>/{z}/{x}/{y}.png`
-- **Max Zoom Level**: 15 (tiles don't exist past that — set lower than 17)
-
-## 3. Offline caching — test this before the trip
-
-This is a live tile server: iHunter fetches each tile over the internet the first
-time it's viewed. Whether it then caches those tiles for offline use once you
-lose signal is **not something I've verified**. Before relying on this in the
-field:
-
-1. While still on WiFi/cell, open iHunter with this layer on and pan/zoom across
-   your whole hunt area at the zoom levels you'll actually use.
-2. Turn on Airplane Mode and confirm the tiles still render.
-
-If they don't persist offline, this layer is only useful with signal, and the
-GPX/KML files (or the QField package) remain the reliable offline option.
+Cutblocks were clipped to the *actual* WMU polygon boundaries (not just their
+bounding box), so cutblocks from neighbouring WMUs that happen to fall inside
+the bbox aren't included. Source: ABMI HFI 2023 v1.1, `o18_TimberHarvest_and_WoodyVegetationRemoval_HFI_2023` layer, read directly from the province-wide
+geodatabase (not the camp-AOI-clipped copy used elsewhere in this project).
