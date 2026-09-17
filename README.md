@@ -1,9 +1,9 @@
 # Cutblock-age XYZ tile layers — WMU 356 / 354 / 353
 
-Two species-tuned versions of the same underlying cutblock data (ABMI HFI 2023
-v1.1), covering the full boundaries of WMU 356/354/353 (Cutbank/Deep
-Valley/Simonette), not just a small camp AOI. Both: 25,638 tiles, 256x256 PNG,
-EPSG:3857 (Google/XYZ numbering), zoom 9-15, ~43MB each.
+Three versions of the same underlying cutblock data (ABMI HFI 2023 v1.1),
+covering the full boundaries of WMU 356/354/353 (Cutbank/Deep
+Valley/Simonette), not just a small camp AOI. 256x256 PNG, EPSG:3857
+(Google/XYZ numbering), zoom 9-15.
 
 ## elk/ — elk forage-value coloring
 
@@ -34,6 +34,16 @@ forage -- the whole palette is deliberately blue/purple, not a re-tinted
 green, so it's never ambiguous with the elk layer if both are loaded in the
 same app at once.
 
+## moose_3to6/ — moose early-browse-peak spotlight (single band, not a gradient)
+
+Just the 3-6yr window, highlighted in hot pink, everything else left
+transparent. Based on published moose cutblock-age selection studies showing
+a sharp early peak in used/available location ratios a few years post-harvest
+(location counts typically peaking ~5-7yr, selection ratio >1 starting
+earlier) -- narrower and more specific than the 5-15yr gradient bin in the
+full moose/ layer above. 6,289 tiles, 7.2MB (much smaller since it's one
+narrow age band instead of the full 0-40yr range).
+
 ## Hosting: GitHub Pages
 
 Enable Pages on this repo (Settings -> Pages -> Deploy from a branch -> root).
@@ -41,6 +51,7 @@ Tile URLs:
 
 - Elk: `https://<your-username>.github.io/<repo-name>/elk/{z}/{x}/{y}.png`
 - Moose: `https://<your-username>.github.io/<repo-name>/moose/{z}/{x}/{y}.png`
+- Moose 3-6yr spotlight: `https://<your-username>.github.io/<repo-name>/moose_3to6/{z}/{x}/{y}.png`
 
 Add each as its own Base Map entry in iHunter (Map Type = XYZ, Max Zoom = 15)
 so you can toggle between them independently.
